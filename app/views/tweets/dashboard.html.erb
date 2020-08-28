@@ -1,0 +1,33 @@
+
+<% if current_user%>
+  <%= render 'tweets/form', tweet: @tweet %>
+<% end %>
+  <br>
+<% @tweets.reverse.each do |tweet| %>
+<div class="card" style="width: 30rem;">
+
+  <div class="card-body">
+  <%=image_tag tweet.user.image_url,  class: "rounded-circle border border-info " %>
+    <h5 class="card-title">@<%=tweet.user.name%></h5>
+    <br>
+    <br>
+ <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(tweet.created_at) %></h6>
+    <p class="card-text"><%= tweet.content %></p>
+    
+    <%= link_to 'like' , new_like_path, method: :post , class: "fas fa-heart"%>
+    
+  <%=@setting%>
+  
+    <%= link_to 'retweet', new_like_path, method: :post , class: "fas fa-retweet"%>
+    
+  
+      
+  </div>
+</div>
+<br>
+ 
+ <% end %>
+
+<%= paginate @tweets %>
+
+

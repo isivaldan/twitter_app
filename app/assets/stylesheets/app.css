@@ -1,0 +1,13 @@
+nav img {
+    height: 50px;
+    width: 50px;
+}
+
+.card img {
+    height: 50px;
+    width: 50px;
+}
+
+.card h5 {
+    display: inline-grid;
+}

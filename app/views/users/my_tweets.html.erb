@@ -1,0 +1,31 @@
+<h1> Hola <%=current_user.name%></h1>
+
+<br>
+
+ <p><%= link_to 'Nuevo tweet', tweets_new_path, class: "btn btn-info" %> </p>
+<% @tweets.reverse.each do |tweet| %>
+<div class="card" style="width: 30rem;">
+
+  <div class="card-body">
+    <%=image_tag current_user.image_url,  class: "rounded-circle border border-info " %>
+    <h5 class="card-title">@<%=@current_user.name%></h5>
+    <br>
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(tweet.created_at) %></h6>
+    <p class="card-text"><%= tweet.content %></p>
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-retweet"></i>
+      <% if user_signed_in? && current_user || current_user.admin? %> 
+        <p> <%= link_to 'edit', tweets_new_path(tweet), class: "btn btn-info" %>
+        <%= link_to 'delete', tweets_new_path, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %></p>
+      <% else %>
+          <p><%= link_to 'Show', tweet, class: "btn btn-info" %> </p>
+      <% end %>
+      
+  </div>
+</div>
+<br>
+ <% end %>
+
+
+ 

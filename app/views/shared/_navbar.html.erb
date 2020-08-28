@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+ <i class="fas fa-dragon fa-2x text-light"></i>
+ 
+  <%= link_to 'Tweertle App',  root_path , class: "navbar-brand"%>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto">
+        
+        <% if user_signed_in? %>
+        <% if current_user.image_url %>
+           <%=image_tag current_user.image_url,  class: "rounded-circle " %>
+           <% else %>
+           <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt="empty profile" class ="rounded-circle">
+            
+        <% end %>
+       
+         <%= link_to 'Editar Perfil',  edit_user_registration_path , class: "nav-item nav-link active"%>
+        <%= link_to 'Mis Tweets', users_my_tweets_path , class: "nav-item nav-link active"%>
+        <%= link_to 'Log Out', destroy_user_session_path ,method: :delete, class: "nav-item nav-link active"%>
+        
+        <% else %>
+        <%= link_to 'Log In', new_user_session_path , class: "nav-item nav-link active"%>
+        <%= link_to 'Registrarse', new_user_registration_path , class: "nav-item nav-link active"%>
+        <% end %>
+    </div>
+  </div>
+</nav>
+
+
