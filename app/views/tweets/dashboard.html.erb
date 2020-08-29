@@ -2,32 +2,7 @@
 <% if current_user%>
   <%= render 'tweets/form', tweet: @tweet %>
 <% end %>
-  <br>
-<% @tweets.reverse.each do |tweet| %>
-  <div class="card" style="width: 30rem;">
-
-    <div class="card-body">
-    <%=image_tag tweet.user.image_url,  class: "rounded-circle border border-info " %>
-      <h5 class="card-title">@<%=tweet.user.name%></h5>
-      <br>
-      <br>
-       <h6 class="card-subtitle mb-2 text-muted">
-        <a href=<%=tweets_path(tweet.id)%>> <%= time_ago_in_words(tweet.created_at) %></a>
-        </h6>
-      <p class="card-text"><%= tweet.content %></p>
-      <%=tweet.likes_count%>
-      <%= link_to 'like' , likes_path(tweet.id), method: :post , class: "fas fa-heart"%>
-  
-  
-      <%=tweet.retweets_count%>
-      <%= link_to 'retweet', retweets_path(tweet.id), method: :post , class: "fas fa-retweet"%>
-      
-    </div>
-  </div>
-  <br>
- 
- <% end %>
-
+<br><br>
  <% @retweets.reverse.each do |retweet| %>
     <div class="card" style="width: 30rem;">
     <div class="container">
@@ -50,12 +25,57 @@
        
             <%=retweet.tweet.retweets_count%>
             <%= link_to 'retweet', retweets_path(retweet.tweet_id), method: :post , class: "fas fa-retweet"%>
+            <% else %>
+             <%=retweet.tweet.likes_count%>
+              <li class ="fas fa-heart"></li>
+            
+            
+                <%=retweet.tweet.retweets_count%>
+                <li class ="fas fa-retweet"></li>
         <% end %>
       </div>
     </div>
     </div>
     <br>
  <% end %>
+
+
+  <br>
+<% @tweets.reverse.each do |tweet| %>
+  <div class="card" style="width: 30rem;">
+
+    <div class="card-body">
+    <%=image_tag tweet.user.image_url,  class: "rounded-circle border border-info " %>
+      <h5 class="card-title">@<%=tweet.user.name%></h5>
+      <br>
+      <br>
+       <h6 class="card-subtitle mb-2 text-muted">
+        <a href=<%=tweets_path(tweet.id)%>> <%= time_ago_in_words(tweet.created_at) %></a>
+        </h6>
+      <p class="card-text"><%= tweet.content %></p>
+       <% if current_user %>
+      <%=tweet.likes_count%>
+      <%= link_to 'like' , likes_path(tweet.id), method: :post , class: "fas fa-heart"%>
+  
+  
+      <%=tweet.retweets_count%>
+      <%= link_to 'retweet', retweets_path(tweet.id), method: :post , class: "fas fa-retweet"%>
+      <% else %>
+      <%=tweet.likes_count%>
+     <li class ="fas fa-heart"></li>
+  
+  
+      <%=tweet.retweets_count%>
+      <li class ="fas fa-retweet"></li>
+     
+      <% end %>
+    </div>
+  </div>
+  <br>
+ 
+ <% end %>
+
+
 
 <%= paginate @tweets %>
 
