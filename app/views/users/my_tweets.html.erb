@@ -17,7 +17,7 @@
     <i class="fas fa-retweet"></i>
       <% if user_signed_in? && current_user || current_user.admin? %> 
         <p> <%= link_to 'edit', tweets_new_path(tweet), class: "btn btn-info" %>
-         <%= link_to 'Show', tweet, class: "btn btn-info" %>
+         <%= link_to 'Show', tweet_path(tweet.id), class: "btn btn-info" %>
         <%= link_to 'delete', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %>
           </p>
       <% end %>

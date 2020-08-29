@@ -18,7 +18,7 @@ class TweetsController < ApplicationController
   end
 
   def show
-
+    @likes = Like.all
   end
   def create
     @tweet = Tweet.new(tweet_params)

@@ -1,0 +1,31 @@
+
+  <br>
+  <br>
+   <div class="card" style="width: 30rem;">
+
+    <div class="card-body">
+    <%=image_tag @tweet.user.image_url,  class: "rounded-circle border border-info " %>
+      <h5 class="card-title">@<%=@tweet.user.name%></h5>
+      <br>
+      <br>
+       <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(@tweet.created_at) %></h6>
+      <p class="card-text"><%= @tweet.content %></p>
+      <%=@tweet.likes_count%>
+      <%= link_to 'like' , likes_path(@tweet.id), method: :post , class: "fas fa-heart"%>
+  
+  
+      <%=@tweet.retweets_count%>
+      <%= link_to 'retweet', retweets_path(@tweet.id), method: :post , class: "fas fa-retweet"%><br>
+      <% @likes.each do |like| %>
+        <% if @tweet.id==like.tweet_id %>
+          
+          <%=image_tag like.user.image_url,  class: "rounded-circle border border-info " %>
+
+          <% end %>
+   
+         <% end %>
+    </div>
+  </div>
+  <br>
+
+<%= link_to 'Back', users_my_tweets_path %>
