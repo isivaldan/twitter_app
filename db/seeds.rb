@@ -5,7 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-50.times do
-    Tweet.create(content: Faker::Movies::Hobbit.quote, user_id: 3)
+
+25.times do
+    users = rand(1..3)
+    Tweet.create(content: Faker::Movies::Hobbit.quote, retweets_count: 0,likes_count: 0, user_id: users)
   
 end

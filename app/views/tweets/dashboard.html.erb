@@ -4,28 +4,55 @@
 <% end %>
   <br>
 <% @tweets.reverse.each do |tweet| %>
-<div class="card" style="width: 30rem;">
+  <div class="card" style="width: 30rem;">
 
-  <div class="card-body">
-  <%=image_tag tweet.user.image_url,  class: "rounded-circle border border-info " %>
-    <h5 class="card-title">@<%=tweet.user.name%></h5>
-    <br>
-    <br>
- <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(tweet.created_at) %></h6>
-    <p class="card-text"><%= tweet.content %></p>
-    
-    <%= link_to 'like' , new_like_path, method: :post , class: "fas fa-heart"%>
-    
-  <%=@setting%>
+    <div class="card-body">
+    <%=image_tag tweet.user.image_url,  class: "rounded-circle border border-info " %>
+      <h5 class="card-title">@<%=tweet.user.name%></h5>
+      <br>
+      <br>
+  <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(tweet.created_at) %></h6>
+      <p class="card-text"><%= tweet.content %></p>
+      <%=tweet.likes_count%>
+      <%= link_to 'like' , likes_path(tweet.id), method: :post , class: "fas fa-heart"%>
   
-    <%= link_to 'retweet', new_like_path, method: :post , class: "fas fa-retweet"%>
-    
   
+      <%=tweet.retweets_count%>
+      <%= link_to 'retweet', retweets_path(tweet.id), method: :post , class: "fas fa-retweet"%>
       
+    </div>
   </div>
-</div>
-<br>
+  <br>
  
+ <% end %>
+
+ <% @retweets.reverse.each do |retweet| %>
+    <div class="card" style="width: 30rem;">
+    <div class="container">
+    <%=image_tag retweet.user.image_url,  class: "rounded-circle border border-info " %>
+    <h5 class="card-title">@<%=retweet.user.name%></h5>
+
+    <%= link_to 'retwiteaste', retweets_path, class: "fas fa-retweet"%>
+   
+
+      <div class="card-body">
+      <%=image_tag retweet.tweet.user.image_url,  class: "rounded-circle border border-info " %>
+        <h5 class="card-title">@<%=retweet.user.name%></h5>
+        <br>
+        <br>
+    <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(retweet.tweet.created_at) %></h6>
+        <p class="card-text"><%= retweet.tweet.content %></p>
+         <%=retweet.tweet.likes_count%>
+         <%= link_to 'like' , likes_path(retweet.tweet_id), method: :post , class: "fas fa-heart"%>
+    
+    
+        <%=retweet.tweet.retweets_count%>
+        <%= link_to 'retweet', retweets_path(retweet.tweet_id), method: :post , class: "fas fa-retweet"%>
+      </div>
+    </div>
+    </div>
+    <br>
+
  <% end %>
 
 <%= paginate @tweets %>

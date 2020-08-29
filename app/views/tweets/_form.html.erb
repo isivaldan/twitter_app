@@ -1,13 +1,14 @@
 
-
-
 <%= form_with(model: tweet, local: true) do |form| %>
 
  <div class="field">
  <%= form.label :current_user, :value =>  current_user.name  %>
     <%= form.hidden_field :user_id, :value =>  @currentUser %>
-  </div>
-
+    <% @init= 0 %>
+     <%= form.hidden_field :likes_count, :value => @init %>
+    <%= form.hidden_field :retweets_count, :value => @init %>
+ </div>
+ 
   <div class="field">
     <%= form.label :tweet %>
     <%= form.text_area :content, id: :tweet_content %>

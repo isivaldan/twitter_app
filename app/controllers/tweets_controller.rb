@@ -1,7 +1,9 @@
 class TweetsController < ApplicationController
+  before_action :set_tweet, only: [:show, :edit,:update,:destroy, :complete]
   def dashboard
    
     @tweets = Tweet.all
+    @retweets =Retweet.all
     @tweets = Tweet.order(:created_at).page params[:page]
     if current_user
       @tweet= Tweet.new
@@ -35,15 +37,15 @@ class TweetsController < ApplicationController
   end
   def destroy
     @tweet.destroy
-    redirect_to tweets_dashboard_path
+    redirect_to users_my_tweets_path
   end
 
   private
   def tweet_params
-      params.require(:tweet).permit(:content,:likes,:retweets,:user_id)
+      params.require(:tweet).permit(:content,:likes_count,:retweets_count,:user_id)
     end
   def set_tweet
-    @tweet = tweet.find(params[:id])
+    @tweet = Tweet.find(params[:id])
   end
 
 end
