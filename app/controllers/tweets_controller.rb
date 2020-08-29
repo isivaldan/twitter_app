@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
    
     @tweets = Tweet.all
     @retweets =Retweet.all
-    @tweets = Tweet.order(:created_at).page params[:page]
+    organized_pages
     if current_user
       @tweet= Tweet.new
 
@@ -39,7 +39,16 @@ class TweetsController < ApplicationController
     @tweet.destroy
     redirect_to users_my_tweets_path
   end
-
+  def index
+   
+   @tweet =Tweet.find_by(id:params[:format])
+   @likes = Like.all
+   # @reweets = Retweet.where(tweet_id:@tweet.id)
+  end
+  def organized_pages
+    
+    @tweets = Tweet.order(:created_at).page params[:page]
+  end
   private
   def tweet_params
       params.require(:tweet).permit(:content,:likes_count,:retweets_count,:user_id)

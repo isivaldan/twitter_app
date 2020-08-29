@@ -11,7 +11,9 @@
       <h5 class="card-title">@<%=tweet.user.name%></h5>
       <br>
       <br>
-  <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(tweet.created_at) %></h6>
+       <h6 class="card-subtitle mb-2 text-muted">
+        <a href=<%=tweets_path(tweet.id)%>> <%= time_ago_in_words(tweet.created_at) %></a>
+        </h6>
       <p class="card-text"><%= tweet.content %></p>
       <%=tweet.likes_count%>
       <%= link_to 'like' , likes_path(tweet.id), method: :post , class: "fas fa-heart"%>
@@ -31,28 +33,28 @@
     <div class="container">
     <%=image_tag retweet.user.image_url,  class: "rounded-circle border border-info " %>
     <h5 class="card-title">@<%=retweet.user.name%></h5>
-
-    <%= link_to 'retwiteaste', retweets_path, class: "fas fa-retweet"%>
-   
-
+      <p class="fas fa-retweet">retweet</p>
       <div class="card-body">
       <%=image_tag retweet.tweet.user.image_url,  class: "rounded-circle border border-info " %>
         <h5 class="card-title">@<%=retweet.user.name%></h5>
         <br>
         <br>
-    <h6 class="card-subtitle mb-2 text-muted"><%= time_ago_in_words(retweet.tweet.created_at) %></h6>
+        
+        <h6 class="card-subtitle mb-2 text-muted">
+        <a href=<%=tweets_path(retweet.tweet_id)%>> <%= time_ago_in_words(retweet.tweet.created_at) %></a>
+        </h6>
         <p class="card-text"><%= retweet.tweet.content %></p>
-         <%=retweet.tweet.likes_count%>
-         <%= link_to 'like' , likes_path(retweet.tweet_id), method: :post , class: "fas fa-heart"%>
-    
-    
-        <%=retweet.tweet.retweets_count%>
-        <%= link_to 'retweet', retweets_path(retweet.tweet_id), method: :post , class: "fas fa-retweet"%>
+        <% if current_user %>
+            <%=retweet.tweet.likes_count%>
+            <%= link_to 'like' , likes_path(retweet.tweet_id), method: :post , class: "fas fa-heart"%>
+       
+            <%=retweet.tweet.retweets_count%>
+            <%= link_to 'retweet', retweets_path(retweet.tweet_id), method: :post , class: "fas fa-retweet"%>
+        <% end %>
       </div>
     </div>
     </div>
     <br>
-
  <% end %>
 
 <%= paginate @tweets %>

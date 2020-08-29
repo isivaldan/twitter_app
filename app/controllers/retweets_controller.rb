@@ -1,4 +1,5 @@
 class RetweetsController < ApplicationController
+ 
   def new
     @retweet= Retweet.new
   end
@@ -18,10 +19,13 @@ class RetweetsController < ApplicationController
     end
   end
 
-  def index
-    @retweet =Retweet.find_by(id:params[:format])
-  end
-
+ 
   def destroy
   end
+  def show
+    @reweets = Retweet.all
+  end
+
+
+
 end
