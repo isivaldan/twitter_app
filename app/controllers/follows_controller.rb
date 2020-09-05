@@ -8,15 +8,16 @@ class FollowsController < ApplicationController
   end
 
   def create
-    @title = "Follow"
-    tweet =Tweet.find_by(id:params[:format])
-    if Follow.find_by(following_id:tweet.user_id,follower_id:current_user.id )
-      @destruir= Follow.find_by(following_id:tweet.user_id,follower_id:current_user.id )
+    
+    user_b =User.find_by(id:params[:format])
+    if Follow.find_by(following_id:user_b.id,follower_id:current_user.id )
+      @destruir= Follow.find_by(following_id:user_b.id,follower_id:current_user.id )
       @destruir.destroy
       @title
       redirect_to root_path
+      @title = "Follow"
     else
-      Follow.create(following_id:tweet.user_id,follower_id:current_user.id )
+      Follow.create(following_id:user_b.id,follower_id:current_user.id )
       @title="Followed"
       redirect_to root_path
     end
