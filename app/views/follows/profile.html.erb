@@ -1,49 +1,37 @@
 
-<% if current_user%>
+ <%= link_to @title , follows_path(@tweet.user_id), method: :post , class: "btn btn-outline-primary"%>
 
- <%= search_form_for @q, method: :get ,url: root_path do |f| %>
-  <%= f.label :content_cont %>
-  <%= f.search_field :content_cont %>
-  <%= f.submit 'buscar'%>
-  <% end %>
-
-  <%= render 'tweets/form', tweet: @tweet %>
- 
-
-<% end %>
 <br><br>
  <% @retweets.each do |retweet| %>
     <div class="card" style="width: 30rem;">
     <div class="container">
     <br>
     <%=image_tag retweet.user.image_url,  class: "rounded-circle border border-info " %>
-   
-    <span>@</span><%= link_to retweet.user.name, follows_profile_path(retweet.user.id), class: "card-title"%>
+    <h5 class="card-title">@<%=retweet.user.name%></h5>
       <p class="fas fa-retweet">retweet</p>
       <div class="card-body">
       <%=image_tag retweet.tweet.user.image_url,  class: "rounded-circle border border-info " %>
-       <span>@</span><%= link_to retweet.tweet.user.name, follows_profile_path(retweet.tweet.id), class: "card-title"%>
-        
+        <h5 class="card-title">@<%=retweet.tweet.user.name%></h5>
         <br>
         <br>
         
         <h6 class="card-subtitle mb-2 text-muted">
         <a href=<%=tweets_path(retweet.tweet_id)%>> <%= time_ago_in_words(retweet.tweet.created_at) %></a>
         </h6>
-       
+        
 
-          <p class="card-text">
-          <% @content = retweet.tweet.content %>
-          <% @content = @content.split(" ") %>
-      
-          <% @newcontent = @content.each do |item| %>
-            <% if item.include?("#") %>
-              <%=item = link_to item, tweets_tweet_search_path(item) %>
-            <% else %>
-              <%=item%> 
-            <% end %>
+        <p class="card-text">
+        <% @content = retweet.tweet.content %>
+        <% @content = @content.split(" ") %>
+    
+        <% @newcontent = @content.each do |item| %>
+          <% if item.include?("#") %>
+            <%=item = link_to item, tweets_tweet_search_path(item) %>
+          <% else %>
+            <%=item%> 
           <% end %>
-          </p>
+        <% end %>
+        </p>
         <% if current_user %>
             <%=retweet.tweet.likes_count%>
             <%= link_to 'like' , likes_path(retweet.tweet_id), method: :post , class: "fas fa-heart"%>
@@ -71,13 +59,13 @@
 
     <div class="card-body">
     <%=image_tag tweet.user.image_url,  class: "rounded-circle border border-info " %>
-     <span>@</span><%= link_to tweet.user.name, follows_profile_path(tweet.id), class: "card-title"%>
-      
+      <h5 class="card-title">@<%=tweet.user.name%></h5>
       <br>
       <br>
        <h6 class="card-subtitle mb-2 text-muted">
         <a href=<%=tweets_path(tweet.id)%>> <%= time_ago_in_words(tweet.created_at) %></a>
         </h6>
+
 
        <p class="card-text">
         <% @content = tweet.content %>
@@ -91,9 +79,7 @@
           <% end %>
         <% end %>
         </p>
-
-     
-      
+  
        <% if current_user %>
       <%=tweet.likes_count%>
       <%= link_to 'like' , likes_path(tweet.id), method: :post , class: "fas fa-heart"%>

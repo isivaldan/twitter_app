@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# 25.times do
-#     users = rand(1..3)
-#     Tweet.create(content: Faker::Movies::Hobbit.quote, retweets_count: 0,likes_count: 0, user_id: users)
+25.times do
+    users = rand(7..9)
+    Tweet.create(content: Faker::Movies::Hobbit.quote, retweets_count: 0,likes_count: 0, user_id: users)
   
-#end
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+end
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

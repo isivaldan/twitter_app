@@ -1,0 +1,5 @@
+<%= search_form_for @q, method: :get ,url: root_path do |f| %>
+  <%= f.label :content_cont %>
+  <%= f.search_field :content_cont %>
+  <%= f.submit 'buscar'%>
+  <% end %>

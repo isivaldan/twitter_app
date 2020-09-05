@@ -4,15 +4,12 @@ class TweetsController < ApplicationController
   def dashboard
 
    if current_user
+    @q = Tweet.tweets_for_me(current_user.followings.pluck(:id)).ransack(params[:q])
+    @tweets = @q.result.order('created_at DESC').page params[:page]
+
+    @retweets =Retweet.retweets_for_me(current_user)
+   
     
-   @tweets =Tweet.tweets_for_me(current_user)
-   # @tweets =Tweet.all
-   @retweets =Retweet.retweets_for_me(current_user)
-   @tweets.each do |tweet|
-    puts "ESTOS SON TWEETS #{tweet.user.name}"
-   end
-    #@retweets =Retweet.all
-    organized_pages
     @tweet= Tweet.new
     @currentUser = current_user.id
     else
@@ -45,6 +42,20 @@ class TweetsController < ApplicationController
   def update
 
   end
+  def tweet_search
+    @search_term = params[:format]
+
+    @q= Tweet.where("tweets.content LIKE ?", "%#{@search_term}%").ransack(params[:q])
+    if @q.result.start_with?('#')
+      @tweets = @q.result
+    else
+      flash[:notice] = "Busque un #"
+      redirect_to tweets_tweet_search_path
+    end
+
+ 
+  end
+
   def destroy
     @tweet.destroy
     redirect_to users_my_tweets_path
@@ -55,10 +66,7 @@ class TweetsController < ApplicationController
    @likes = Like.where(user: current_user, tweet: @tweet)
    # @reweets = Retweet.where(tweet_id:@tweet.id)
   end
-  def organized_pages
-    
-    @tweets = Tweet.order(:created_at).page params[:page]
-  end
+  
 
   private
 

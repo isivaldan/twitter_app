@@ -1,0 +1,59 @@
+
+  <br>
+   <%= search_form_for @q, method: :get ,url: tweets_tweet_search_path do |f| %>
+  <%= f.label :content_cont %>
+  <%= f.search_field :content_cont %>
+  <%= f.submit 'buscar'%>
+  <% end %>
+<%=@q.result%>
+
+<% @tweets.each do |tweet| %>
+  <div class="card" style="width: 30rem;">
+
+    <div class="card-body">
+    <%=image_tag tweet.user.image_url,  class: "rounded-circle border border-info " %>
+      <span>@</span><%= link_to tweet.user.name, follows_profile_path(tweet.id), class: "card-title"%>
+      <br>
+      <br>
+       <h6 class="card-subtitle mb-2 text-muted">
+        <a href=<%=tweets_path(tweet.id)%>> <%= time_ago_in_words(tweet.created_at) %></a>
+        </h6>
+
+
+       <p class="card-text">
+        <% @content = tweet.content %>
+        <% @content = @content.split(" ") %>
+    
+        <% @newcontent = @content.each do |item| %>
+          <% if item.include?("#") %>
+            <%=item = link_to item, tweets_tweet_search_path(item) %>
+          <% else %>
+            <%=item%> 
+          <% end %>
+        <% end %>
+        </p>
+
+     
+      
+       <% if current_user %>
+      <%=tweet.likes_count%>
+      <%= link_to 'like' , likes_path(tweet.id), method: :post , class: "fas fa-heart"%>
+  
+  
+      <%=tweet.retweets_count%>
+      <%= link_to 'retweet', retweets_path(tweet.id), method: :post , class: "fas fa-retweet"%>
+      <% else %>
+      <%=tweet.likes_count%>
+     <li class ="fas fa-heart"></li>
+  
+  
+      <%=tweet.retweets_count%>
+      <li class ="fas fa-retweet"></li>
+     
+      <% end %>
+    </div>
+  </div>
+  <br>
+ 
+ <% end %>
+
