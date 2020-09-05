@@ -44,16 +44,10 @@ class TweetsController < ApplicationController
   end
   def tweet_search
     @search_term = params[:format]
-
-    @q= Tweet.where("tweets.content LIKE ?", "%#{@search_term}%").ransack(params[:q])
-    if @q.result.start_with?('#')
+    
+      @q= Tweet.where("tweets.content LIKE ?", "%#{@search_term}%").ransack(params[:q])
       @tweets = @q.result
-    else
-      flash[:notice] = "Busque un #"
-      redirect_to tweets_tweet_search_path
-    end
 
- 
   end
 
   def destroy
