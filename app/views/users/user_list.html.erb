@@ -1,0 +1,12 @@
+<% @users.reverse.each do |user| %>
+<div class="card" style="width: 30rem;">
+
+  <div class="card-body">
+    <%=image_tag user.image_url,  class: "rounded-circle border border-info " %>
+    <h5 class="card-title">@<%=user.name%></h5>
+    <span>@</span><%= link_to "Follow", follows_path(user.id),method: :post , class: "card-title"%>
+    <br>
+  </div>
+</div>
+<br>
+ <% end %>

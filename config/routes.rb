@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'tweets#dashboard'
   get 'tweets/new'
   get 'users/my_tweets'
+  get 'users/user_list'
   get 'tweets/tweet_search'
   get 'follows/profile', to: 'follows#profile'
   post '/follows', to: 'follows#create'

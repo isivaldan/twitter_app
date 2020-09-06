@@ -3,20 +3,22 @@ class TweetsController < ApplicationController
 
   def dashboard
 
-   if current_user
+   if !current_user
+    @q = Tweet.ransack(params[:q])
+    @tweets = @q.result.order('created_at DESC').page params[:page]
+
+    @retweets =Retweet.all
+   else
     @q = Tweet.tweets_for_me(current_user.followings.pluck(:id)).ransack(params[:q])
     @tweets = @q.result.order('created_at DESC').page params[:page]
 
     @retweets =Retweet.retweets_for_me(current_user)
    
-    
     @tweet= Tweet.new
     @currentUser = current_user.id
-    else
-      redirect_to user_session_path
+  
     end
     
-   
   end
 
   def new

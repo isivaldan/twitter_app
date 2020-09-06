@@ -18,6 +18,7 @@
        
          <%= link_to 'Editar Perfil',  edit_user_registration_path , class: "nav-item nav-link active"%>
         <%= link_to 'Mis Tweets', users_my_tweets_path , class: "nav-item nav-link active"%>
+         <%= link_to 'Usuarios', users_user_list_path , class: "nav-item nav-link active"%>
         <%= link_to 'Log Out', destroy_user_session_path ,method: :delete, class: "nav-item nav-link active"%>
         
         <% else %>
