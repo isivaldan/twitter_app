@@ -1,5 +1,5 @@
 
- <%= link_to @title , follows_path(@tweet.user_id), method: :post , class: "btn btn-outline-primary"%>
+ <%= link_to "follow" , follows_path(@tweet.user_id), method: :post , class: "btn btn-outline-primary"%>
 
 <br><br>
  <% @retweets.each do |retweet| %>

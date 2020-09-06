@@ -17,8 +17,8 @@
     <div class="container">
     <br>
     <%=image_tag retweet.user.image_url,  class: "rounded-circle border border-info " %>
+   <h5 class="card-title">@<%=retweet.user.name%></h5>
    
-    <span>@</span><%= link_to retweet.user.name, follows_profile_path(retweet.user.id), class: "card-title"%>
       <p class="fas fa-retweet">retweet</p>
       <div class="card-body">
       <%=image_tag retweet.tweet.user.image_url,  class: "rounded-circle border border-info " %>
