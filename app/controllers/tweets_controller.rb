@@ -45,7 +45,7 @@ class TweetsController < ApplicationController
 
   end
   def search
-    @search_term = params[:search]
+    
     @q= Tweet.ransack(content_cont_any:  params[:search])
     @tweets = @q.result
   end
