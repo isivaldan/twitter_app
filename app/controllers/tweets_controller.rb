@@ -44,12 +44,10 @@ class TweetsController < ApplicationController
   def update
 
   end
-  def tweet_search
-    @search_term = params[:format]
-    
-      @q= Tweet.where("tweets.content LIKE ?", "%#{@search_term}%").ransack(params[:q])
-      @tweets = @q.result
-
+  def search
+    @search_term = params[:search]
+    @q= Tweet.ransack(content_cont_any:  params[:search])
+    @tweets = @q.result
   end
 
   def destroy

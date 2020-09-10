@@ -38,7 +38,7 @@
       
           <% @newcontent = @content.each do |item| %>
             <% if item.include?("#") %>
-              <%=item = link_to item, tweets_tweet_search_path(item) %>
+              <%=item = link_to item, search_path(search:item.gsub('#','')) %>
             <% else %>
               <%=item%> 
             <% end %>
@@ -85,7 +85,8 @@
     
         <% @newcontent = @content.each do |item| %>
           <% if item.include?("#") %>
-            <%=item = link_to item, tweets_tweet_search_path(item) %>
+          
+            <%=item = link_to item, search_path(search: item.gsub('#','')) %>
           <% else %>
             <%=item%> 
           <% end %>
