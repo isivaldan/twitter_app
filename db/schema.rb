@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_02_214012) do
+ActiveRecord::Schema.define(version: 2020_09_12_173020) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 2020_09_02_214012) do
 
   create_table "tweets", force: :cascade do |t|
     t.string "content"
-    t.integer "likes_count"
-    t.integer "retweets_count"
+    t.integer "likes_count", default: 0
+    t.integer "retweets_count", default: 0
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

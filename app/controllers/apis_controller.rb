@@ -1,5 +1,5 @@
 class ApisController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  #skip_before_action :verify_authenticity_token
   
   def get_last_tweets
   
@@ -41,8 +41,7 @@ class ApisController < ApplicationController
     else
       @tweet = Tweet.new(tweet_params)
       @tweet.user_id=current_user.id
-      @tweet.likes_count=0
-      @tweet.retweets_count=0
+      
       if @tweet.save
         render json: @tweet , status: :created
       else
