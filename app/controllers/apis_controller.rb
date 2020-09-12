@@ -1,6 +1,6 @@
 class ApisController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
+  #trate de hacer la autenticacion con token y no me funciona, me resultò la bàsica
   def get_last_tweets
   
       if Tweet.all
