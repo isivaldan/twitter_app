@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'users/user_list'
 
   get 'api/news/', to: "apis#get_last_tweets"
+  post 'api/tweets/', to: "apis#post_my_tweet"
   get '/api/:from/:to', to:'apis#date_filter'
   get 'follows/profile', to: 'follows#profile'
   post '/follows', to: 'follows#create'

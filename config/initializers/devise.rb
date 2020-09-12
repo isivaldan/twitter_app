@@ -79,7 +79,7 @@ Devise.setup do |config|
   # enable this with :database unless you are using a custom strategy.
   # The supported strategies are:
   # :database      = Support basic authentication with authentication key + password
-  # config.http_authenticatable = false
+  config.http_authenticatable = true
 
   # If 401 status code should be returned for AJAX requests. True by default.
   # config.http_authenticatable_on_xhr = true
@@ -158,7 +158,7 @@ Devise.setup do |config|
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
   config.reconfirmable = true
-
+  
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
 

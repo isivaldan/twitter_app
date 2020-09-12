@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit,:update,:destroy]
-
+  
   def dashboard
 
    if !current_user
@@ -66,7 +66,7 @@ class TweetsController < ApplicationController
 
   def tweet_params
       params.require(:tweet).permit(:content,:likes_count,:retweets_count,:user_id)
-    end
+  end
   def set_tweet
     @tweet = Tweet.find(params[:id])
   end
