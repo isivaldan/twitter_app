@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit,:update,:destroy]
-  
+  acts_as_token_authentication_handler_for User
   def dashboard
 
    if !current_user

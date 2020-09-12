@@ -12,4 +12,6 @@ class User < ApplicationRecord
 
   has_many :account_follower, foreign_key: :following_id, class_name: "Follow" ,:dependent => :destroy
   has_many :followers, through: :account_follower, source: :follower ,:dependent => :destroy
+
+  acts_as_token_authenticatable
 end
