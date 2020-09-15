@@ -76,7 +76,7 @@
       <br>
       <br>
        <h6 class="card-subtitle mb-2 text-muted">
-        <a href=<%=tweets_path(tweet.id)%>> <%= time_ago_in_words(tweet.created_at) %></a>
+         <%= link_to time_ago_in_words(tweet.created_at) , tweet%>
         </h6>
 
        <p class="card-text">
