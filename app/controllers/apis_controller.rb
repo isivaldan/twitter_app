@@ -37,7 +37,7 @@ class ApisController < ApplicationController
   end
 
   def post_my_tweet
-    @user = authenticate(params[:email], params[:password])
+   # @user = authenticate(params[:email], params[:password])
     if !current_user
       render json: {status: "error", code: 3000, message: "You aren't log in"}
     else
